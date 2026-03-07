@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Guide</title>
+    <!-- Adding a Markdown library to make the lyrics look good -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root { --primary: #b934bd; --bg: #5e35b0; --card: #1e293b; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: white;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0;
+        }
+        .container { width: 90%; max-width: 800px; text-align: center; }
+        h1 { font-size: 3rem; margin-bottom: 40px; font-weight: 800; }
+        
+        .input-box {
+            background: #161e2d;
+            padding: 10px; border-radius: 100px;
+            display: flex; align-items: center;
+            border: 1px solid #2e3a4e;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+        }
+        input {
+            flex: 1; background: transparent; border: none;
+            color: white; padding: 15px 30px; font-size: 1.2rem; outline: none;
+        }
+        button {
+            background: var(--primary); color: #000; border: none;
+            padding: 15px 40px; border-radius: 100px;
+            font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        button:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary); }
+
+        #result {
+            display: none;
+            background: #1e293b;
+            padding: 40px; border-radius: 24px;
+            text-align: left; margin-top: 30px;
+            border-left: 6px solid var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: slideUp 0.5s ease;
+        }
+        
+        .loader {
+            display: none; color: var(--primary); margin: 30px;
+            font-weight: bold; font-size: 1.1rem;
+            letter-spacing: 1px; animation: pulse 1.5s infinite;
+        }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* Song Styling */
+        #result h2, #result h3 { color: var(--primary); margin-top: 0; }
+        #result p { line-height: 1.8; font-size: 1.1rem; color: #cbd5e1; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Student Guide</h1>
+
+        <div class="input-box">
+            <input type="text" id="topic" placeholder="What topic you need to learn..." autocomplete="off">
+            <button onclick="generateSong()">Generate</button>
+        </div>
+
+        <div id="loader" class="loader">Analyzing prompt and making guide</div>
+        <div id="result"></div>
+    </div>
+
+    
+    <script>
+    async function generateSong() {
+        const topic = document.getElementById('topic').value;
+        const resultDiv = document.getElementById('result');
+        const loader = document.getElementById('loader');
+
+        if (!topic) return;
+
+        resultDiv.style.display = 'none';
+        loader.style.display = 'block';
+
+        try {
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ topic: topic })
+            });
+
+            const data = await response.json();
+            loader.style.display = 'none';
+            resultDiv.style.display = 'block';
+
+            resultDiv.innerHTML = marked.parse(data.song);
+
+        } catch (error) {
+            loader.innerText = "Error connecting to Agent.";
+        }
+    }
+
+  
+    document.getElementById("topic").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            generateSong();
+        }
+    });
+
+    </script>
+</body>
+</html>

@@ -9,7 +9,7 @@
     --card: rgba(20, 25, 45, 0.85); /* Semi-transparent dark card */
 }
 
-body {
+ {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, var(--bg-top), var(--bg-mid), var(--bg-bottom));
     color: white;

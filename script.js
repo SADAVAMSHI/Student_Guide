@@ -36,24 +36,44 @@ async function generatePath() {
 
         const data = await response.json();
         
-        // --- DEFENSIVE CHECK START ---
-        // This ensures data.candidates exists and has at least one item
         if (data && data.candidates && data.candidates[0] && data.candidates[0].content) {
             const aiText = data.candidates[0].content.parts[0].text;
             
             loader.style.display = 'none';
             resultDiv.style.display = 'block';
 
-            // Check if marked library is available
+            // 1. Render Markdown to HTML
             if (typeof marked !== 'undefined') {
                 resultDiv.innerHTML = marked.parse(aiText);
             } else {
-                resultDiv.innerText = aiText; // Fallback to plain text
+                resultDiv.innerText = aiText; // Fallback
             }
+
+            // 2. Find Mermaid code blocks, format them, and render the chart
+            if (typeof mermaid !== 'undefined') {
+                // Marked.js automatically turns ```mermaid into <code class="language-mermaid">
+                const mermaidCodes = resultDiv.querySelectorAll('.language-mermaid');
+                
+                mermaidCodes.forEach((codeBlock) => {
+                    const mermaidText = codeBlock.textContent;
+                    const preElement = codeBlock.parentElement; // The wrapping <pre> tag
+                    
+                    // Create a new div specifically for Mermaid to target
+                    const mermaidDiv = document.createElement('div');
+                    mermaidDiv.className = 'mermaid';
+                    mermaidDiv.textContent = mermaidText;
+                    
+                    // Replace the old code block with the new diagram block
+                    preElement.parentNode.replaceChild(mermaidDiv, preElement);
+                });
+
+                // Trigger Mermaid to draw the diagrams
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }
+
         } else {
             throw new Error("The AI returned an empty response. Try a different topic.");
         }
-        // --- DEFENSIVE CHECK END ---
 
     } catch (error) {
         console.error("Path Generation Error:", error);

@@ -1,12 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
 :root { 
-    --primary: #b934bd; 
-    --bg: #5e35b0; 
-    --card: #1e293b; 
+    --primary: #FF007F; /* Vibrant Hot Pink */
+    --secondary: #00F2FE; /* Neon Cyan */
+    --bg-top: #0F0C29; /* Deep Dark Purple */
+    --bg-mid: #302B63;
+    --bg-bottom: #24243E;
+    --card: rgba(20, 25, 45, 0.85); /* Semi-transparent dark card */
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg);
+    /* Vibrant gradient background */
+    background: linear-gradient(135deg, var(--bg-top), var(--bg-mid), var(--bg-bottom));
     color: white;
     display: flex; 
     justify-content: center; 
@@ -24,24 +30,39 @@ body {
 }
 
 h1 { 
-    font-size: 3rem; 
-    margin-bottom: 10px; 
+    font-size: 3.5rem; 
+    margin-bottom: 5px; 
     font-weight: 800; 
+    /* Gradient text effect for the title */
+    background: linear-gradient(to right, var(--secondary), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
-    margin-bottom: 40px;
-    color: #cbd5e1;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #a5b4fc;
 }
 
+.input-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Made the input box significantly smaller */
 .input-box {
-    background: #161e2d;
-    padding: 10px; 
-    border-radius: 100px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 6px; /* Reduced padding */
+    border-radius: 50px;
     display: flex; 
     align-items: center;
-    border: 1px solid #2e3a4e;
-    box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 450px; /* Constrained the maximum width */
 }
 
 .input-box input {
@@ -49,60 +70,67 @@ h1 {
     background: transparent; 
     border: none;
     color: white; 
-    padding: 15px 30px; 
-    font-size: 1.2rem; 
+    padding: 10px 20px; /* Smaller internal padding */
+    font-size: 1rem; /* Scaled down font */
     outline: none;
 }
 
+.input-box input::placeholder {
+    color: #818cf8;
+}
+
 button {
-    background: var(--primary); 
+    background: linear-gradient(45deg, var(--primary), #FF4D4D); 
     color: #fff; 
     border: none;
-    padding: 15px 40px; 
-    border-radius: 100px;
-    font-weight: bold; 
-    font-size: 1.1rem;
+    padding: 10px 25px; /* Smaller button */
+    border-radius: 50px;
+    font-weight: 600; 
+    font-size: 1rem;
     cursor: pointer; 
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
 }
 
 button:hover { 
-    transform: scale(1.05); 
-    box-shadow: 0 0 20px var(--primary); 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 20px rgba(255, 0, 127, 0.6); 
 }
 
 #result {
     display: none;
     background: var(--card);
-    padding: 40px; 
-    border-radius: 24px;
+    padding: 30px; 
+    border-radius: 20px;
     text-align: left; 
     margin-top: 30px;
-    border-left: 6px solid var(--primary);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-top: 4px solid var(--secondary);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
     animation: slideUp 0.5s ease;
 }
 
 .loader {
     display: none; 
-    color: var(--primary); 
+    color: var(--secondary); 
     margin: 30px;
-    font-weight: bold; 
-    font-size: 1.1rem;
+    font-weight: 600; 
+    font-size: 1rem;
     letter-spacing: 1px; 
     animation: pulse 1.5s infinite;
 }
 
 @keyframes slideUp { 
-    from { opacity: 0; transform: translateY(30px); } 
+    from { opacity: 0; transform: translateY(20px); } 
     to { opacity: 1; transform: translateY(0); } 
 }
 
 @keyframes pulse { 
-    0%, 100% { opacity: 1; } 
-    50% { opacity: 0.4; } 
+    0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--secondary); } 
+    50% { opacity: 0.5; text-shadow: none; } 
 }
 
-#result h2, #result h3 { color: var(--primary); margin-top: 20px; }
-#result p, #result li { line-height: 1.8; font-size: 1.1rem; color: #cbd5e1; }
-#result a { color: #818cf8; }
+#result h2, #result h3 { color: var(--secondary); margin-top: 20px; }
+#result p, #result li { line-height: 1.7; font-size: 1rem; color: #e2e8f0; }
+#result a { color: var(--primary); text-decoration: none; font-weight: bold; }
+#result a:hover { text-decoration: underline; }

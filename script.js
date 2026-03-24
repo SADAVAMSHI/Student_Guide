@@ -1,6 +1,6 @@
 document.getElementById('generate-btn').addEventListener('click', generatePath);
 document.getElementById("topic").addEventListener("keydown", function(event) {
-    if (event.key = "Enter") {
+    if (event.key === "Enter") {
         event.preventDefault();
         generatePath();
     }

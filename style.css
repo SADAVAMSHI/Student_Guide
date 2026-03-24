@@ -11,7 +11,6 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    /* Vibrant gradient background */
     background: linear-gradient(135deg, var(--bg-top), var(--bg-mid), var(--bg-bottom));
     color: white;
     display: flex; 
@@ -33,7 +32,6 @@ h1 {
     font-size: 3.5rem; 
     margin-bottom: 5px; 
     font-weight: 800; 
-    /* Gradient text effect for the title */
     background: linear-gradient(to right, var(--secondary), var(--primary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -51,10 +49,9 @@ h1 {
     width: 100%;
 }
 
-/* Made the input box significantly smaller */
 .input-box {
     background: rgba(0, 0, 0, 0.4);
-    padding: 6px; /* Reduced padding */
+    padding: 6px; 
     border-radius: 50px;
     display: flex; 
     align-items: center;
@@ -62,7 +59,7 @@ h1 {
     box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     backdrop-filter: blur(10px);
     width: 100%;
-    max-width: 450px; /* Constrained the maximum width */
+    max-width: 450px; 
 }
 
 .input-box input {
@@ -70,8 +67,8 @@ h1 {
     background: transparent; 
     border: none;
     color: white; 
-    padding: 10px 20px; /* Smaller internal padding */
-    font-size: 1rem; /* Scaled down font */
+    padding: 10px 20px; 
+    font-size: 1rem; 
     outline: none;
 }
 
@@ -83,7 +80,7 @@ button {
     background: linear-gradient(45deg, var(--primary), #FF4D4D); 
     color: #fff; 
     border: none;
-    padding: 10px 25px; /* Smaller button */
+    padding: 10px 25px; 
     border-radius: 50px;
     font-weight: 600; 
     font-size: 1rem;
@@ -108,6 +105,17 @@ button:hover {
     box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     backdrop-filter: blur(10px);
     animation: slideUp 0.5s ease;
+    overflow-x: auto; /* Prevents long flowcharts from breaking the layout */
+}
+
+/* Styles for the dynamically generated Mermaid chart */
+.mermaid {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
 }
 
 .loader {

@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Guide - AI Learning Path</title>
     
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+    </script>
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,9 +26,10 @@
             </div>
         </div>
 
-        <div id="loader" class="loader">Analyzing industry standards...</div>
+        <div id="loader" class="loader">Analyzing industry standards & building your path...</div>
         <div id="result"></div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

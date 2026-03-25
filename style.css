@@ -158,4 +158,21 @@ button:hover {
     padding: 8px 20px;
     box-shadow: none;
 }
+.login-btn:hover {
+    background: var(--secondary);
+    color: var(--bg-top);
+}
 
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid var(--secondary);
+    cursor: pointer;
+    background: white; /* helps SVG avatars pop */
+    transition: transform 0.2s;
+}
+
+.avatar:hover {
+    transform: scale(1.1);
+}

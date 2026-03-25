@@ -1,5 +1,55 @@
-document.getElementById('generate-btn').addEventListener('click', generatePath);
-document.getElementById("topic").addEventListener("keydown", function(event) {
+// --- DOM ELEMENTS ---
+const loginForm = document.getElementById('login-form');
+const loginScreen = document.getElementById('login-screen');
+const appScreen = document.getElementById('app-screen');
+const avatar = document.getElementById('profile-avatar');
+const topicInput = document.getElementById('topic');
+const generateBtn = document.getElementById('generate-btn');
+const resultDiv = document.getElementById('result');
+const loader = document.getElementById('loader');
+
+// --- 1. UI & LOGIN LOGIC ---
+
+// Handle Dummy Login
+loginForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevents page reload
+    
+    // Get username to generate a unique avatar
+    const username = document.getElementById('username').value;
+    avatar.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
+    
+    // Hide login screen, show app screen
+    loginScreen.classList.add('hidden');
+    appScreen.classList.remove('hidden');
+});
+
+// Handle Logout
+avatar.addEventListener('click', function() {
+    if(confirm("Are you sure you want to log out?")) {
+        // Reset state
+        loginForm.reset();
+        resultDiv.style.display = 'none';
+        topicInput.value = '';
+        
+        // Hide app, show login
+        appScreen.classList.add('hidden');
+        loginScreen.classList.remove('hidden');
+    }
+});
+
+// Handle Trending Courses Clicks
+document.querySelectorAll('.trending-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+        topicInput.value = this.innerText;
+        generatePath(); // Auto-generate on click
+    });
+});
+
+// --- 2. API & GENERATION LOGIC ---
+
+generateBtn.addEventListener('click', generatePath);
+
+topicInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         event.preventDefault();
         generatePath();
@@ -7,10 +57,7 @@ document.getElementById("topic").addEventListener("keydown", function(event) {
 });
 
 async function generatePath() {
-    const topicInput = document.getElementById('topic');
     const topic = topicInput.value.trim();
-    const resultDiv = document.getElementById('result');
-    const loader = document.getElementById('loader');
 
     if (!topic) {
         alert("Please enter a topic to learn.");
@@ -49,25 +96,21 @@ async function generatePath() {
                 resultDiv.innerText = aiText; // Fallback
             }
 
-            // 2. Find Mermaid code blocks, format them, and render the chart
+            // 2. Find and Render Mermaid Diagrams
             if (typeof mermaid !== 'undefined') {
-                // Marked.js automatically turns ```mermaid into <code class="language-mermaid">
                 const mermaidCodes = resultDiv.querySelectorAll('.language-mermaid');
                 
                 mermaidCodes.forEach((codeBlock) => {
                     const mermaidText = codeBlock.textContent;
-                    const preElement = codeBlock.parentElement; // The wrapping <pre> tag
+                    const preElement = codeBlock.parentElement; 
                     
-                    // Create a new div specifically for Mermaid to target
                     const mermaidDiv = document.createElement('div');
                     mermaidDiv.className = 'mermaid';
                     mermaidDiv.textContent = mermaidText;
                     
-                    // Replace the old code block with the new diagram block
                     preElement.parentNode.replaceChild(mermaidDiv, preElement);
                 });
 
-                // Trigger Mermaid to draw the diagrams
                 mermaid.init(undefined, document.querySelectorAll('.mermaid'));
             }
 
@@ -86,38 +129,4 @@ async function generatePath() {
             </div>
         `;
     }
-}// --- NEW FEATURES LOGIC ---
-
-// 1. Trending Courses Click Logic
-document.querySelectorAll('.trending-pill').forEach(pill => {
-    pill.addEventListener('click', function() {
-        // Set the input value to the pill's text
-        document.getElementById('topic').value = this.innerText;
-        // Automatically trigger the generation
-        generatePath(); 
-    });
-});
-
-// 2. Mock Login / Avatar Toggle Logic
-const loginBtn = document.getElementById('login-btn');
-const avatar = document.getElementById('profile-avatar');
-let isLoggedIn = false;
-
-loginBtn.addEventListener('click', () => {
-    isLoggedIn = true;
-    loginBtn.style.display = 'none';
-    avatar.style.display = 'block';
-    
-    // Generates a random nice-looking avatar using DiceBear API
-    const randomSeed = Math.random().toString(36).substring(7);
-    avatar.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${randomSeed}`; 
-});
-// Click the avatar to "logout"
-avatar.addEventListener('click', () => {
-    if(confirm("Do you want to logout?")) {
-        isLoggedIn = false;
-        loginBtn.style.display = 'block';
-        avatar.style.display = 'none';
-    }
-});
-
+}

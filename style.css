@@ -9,17 +9,33 @@
     --card: rgba(20, 25, 45, 0.85); /* Semi-transparent dark card */
 }
 
-body{
+body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, var(--bg-top), var(--bg-mid), var(--bg-bottom));
     color: white;
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    min-height: 100vh; 
     margin: 0;
-    padding: 20px;
     box-sizing: border-box;
+    min-height: 100vh;
+}
+
+/* --- SCREEN TOGGLE STYLES --- */
+.hidden {
+    display: none !important;
+}
+
+.screen {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+#login-screen {
+    align-items: center; 
+    padding-top: 20px;
 }
 
 .container { 
@@ -28,6 +44,49 @@ body{
     text-align: center; 
 }
 
+/* --- LOGIN BOX STYLES --- */
+.login-box {
+    background: var(--card);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    border-top: 4px solid var(--secondary);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 400px;
+    animation: slideUp 0.5s ease;
+}
+
+.login-box h2 {
+    margin-top: 0;
+    color: white;
+}
+
+.login-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.login-box input {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    outline: none;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login-box input::placeholder {
+    color: #818cf8;
+}
+
+/* --- MAIN APP STYLES --- */
 h1 { 
     font-size: 3.5rem; 
     margin-bottom: 5px; 
@@ -35,12 +94,35 @@ h1 {
     background: linear-gradient(to right, var(--secondary), var(--primary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin-top: 0;
 }
 
 .subtitle {
     margin-bottom: 30px;
     font-size: 1.1rem;
     color: #a5b4fc;
+}
+
+/* Avatar & Top Nav */
+.top-nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--secondary);
+    cursor: pointer;
+    background: white;
+    transition: transform 0.2s;
+}
+
+.avatar:hover {
+    transform: scale(1.1);
 }
 
 .input-container {
@@ -94,6 +176,38 @@ button:hover {
     box-shadow: 0 6px 20px rgba(255, 0, 127, 0.6); 
 }
 
+/* Trending Courses */
+.trending-container {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.trending-label {
+    color: #a5b4fc;
+    font-size: 0.9rem;
+}
+
+.trending-pill {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 6px 15px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    box-shadow: none;
+}
+
+.trending-pill:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    border-color: var(--secondary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
 #result {
     display: none;
     background: var(--card);
@@ -105,10 +219,9 @@ button:hover {
     box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     backdrop-filter: blur(10px);
     animation: slideUp 0.5s ease;
-    overflow-x: auto; /* Prevents long flowcharts from breaking the layout */
+    overflow-x: auto;
 }
 
-/* Styles for the dynamically generated Mermaid chart */
 .mermaid {
     background: rgba(0, 0, 0, 0.3);
     padding: 20px;
@@ -142,65 +255,3 @@ button:hover {
 #result p, #result li { line-height: 1.7; font-size: 1rem; color: #e2e8f0; }
 #result a { color: var(--primary); text-decoration: none; font-weight: bold; }
 #result a:hover { text-decoration: underline; }
-/* --- NEW FEATURES CSS --- */
-.top-nav {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-.login-btn {
-    background: transparent;
-    border: 1px solid var(--secondary);
-    color: var(--secondary);
-    padding: 8px 20px;
-    box-shadow: none;
-}
-.login-btn:hover {
-    background: var(--secondary);
-    color: var(--bg-top);
-}
-
-.avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: 2px solid var(--secondary);
-    cursor: pointer;
-    background: white; /* helps SVG avatars pop */
-    transition: transform 0.2s;
-}
-.trending-container {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.trending-label {
-    color: #a5b4fc;
-    font-size: 0.9rem;
-}
-
-.trending-pill {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 6px 15px;
-    font-size: 0.85rem;
-    border-radius: 20px;
-    box-shadow: none;
-}
-
-.avatar:hover {
-    transform: scale(1.1);
-}
-.trending-pill:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}

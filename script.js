@@ -86,4 +86,30 @@ async function generatePath() {
             </div>
         `;
     }
-}
+}// --- NEW FEATURES LOGIC ---
+
+// 1. Trending Courses Click Logic
+document.querySelectorAll('.trending-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+        // Set the input value to the pill's text
+        document.getElementById('topic').value = this.innerText;
+        // Automatically trigger the generation
+        generatePath(); 
+    });
+});
+
+// 2. Mock Login / Avatar Toggle Logic
+const loginBtn = document.getElementById('login-btn');
+const avatar = document.getElementById('profile-avatar');
+let isLoggedIn = false;
+
+loginBtn.addEventListener('click', () => {
+    isLoggedIn = true;
+    loginBtn.style.display = 'none';
+    avatar.style.display = 'block';
+    
+    // Generates a random nice-looking avatar using DiceBear API
+    const randomSeed = Math.random().toString(36).substring(7);
+    avatar.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${randomSeed}`; 
+});
+

@@ -112,4 +112,12 @@ loginBtn.addEventListener('click', () => {
     const randomSeed = Math.random().toString(36).substring(7);
     avatar.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${randomSeed}`; 
 });
+// Click the avatar to "logout"
+avatar.addEventListener('click', () => {
+    if(confirm("Do you want to logout?")) {
+        isLoggedIn = false;
+        loginBtn.style.display = 'block';
+        avatar.style.display = 'none';
+    }
+});
 

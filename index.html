@@ -6,7 +6,6 @@
     <title>Student Guide - AI Learning Path</title>
     
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
         mermaid.initialize({ startOnLoad: false, theme: 'dark' });
@@ -15,30 +14,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="top-nav">
-            <button id="login-btn" class="login-btn">Login</button>
-            <img id="profile-avatar" class="avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Profile" style="display: none;">
+    <div id="login-screen" class="screen">
+        <div class="login-box">
+            <h2>Welcome</h2>
+            <p class="subtitle">Log in to start learning</p>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Username" required autocomplete="off">
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </div>
-    <div class="container">
-        <h1>Student Guide</h1>
-        <div class="subtitle">Your AI-Powered Learning Path Generator</div>
 
-        <div class="input-container">
-            <div class="input-box">
-                <input type="text" id="topic" placeholder="What do you want to learn?" autocomplete="off">
-                <button id="generate-btn">Generate</button>
+    <div id="app-screen" class="screen hidden">
+        <div class="container">
+            <div class="top-nav">
+                <img id="profile-avatar" class="avatar" src="" alt="Profile" title="Click to logout">
             </div>
-        </div>
-        <div class="trending-container">
-            <span class="trending-label">Trending:</span>
-            <button class="trending-pill">Prompt Engineering</button>
-            <button class="trending-pill">Agentic AI</button>
-            <button class="trending-pill">Machine Learning</button>
-            <button class="trending-pill">Full-Stack React</button>
-        </div>
 
-        <div id="loader" class="loader">Analyzing industry standards & building your path...</div>
-        <div id="result"></div>
+            <h1>Student Guide</h1>
+            <div class="subtitle">Your AI-Powered Learning Path Generator</div>
+
+            <div class="input-container">
+                <div class="input-box">
+                    <input type="text" id="topic" placeholder="What do you want to learn?" autocomplete="off">
+                    <button id="generate-btn">Generate</button>
+                </div>
+            </div>
+
+            <div class="trending-container">
+                <span class="trending-label">Trending:</span>
+                <button class="trending-pill">Prompt Engineering</button>
+                <button class="trending-pill">Agentic AI</button>
+                <button class="trending-pill">Machine Learning</button>
+                <button class="trending-pill">Full-Stack React</button>
+            </div>
+
+            <div id="loader" class="loader">Analyzing industry standards & building your path...</div>
+            <div id="result"></div>
+        </div>
     </div>
     
     <script src="script.js"></script>

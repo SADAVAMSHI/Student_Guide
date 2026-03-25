@@ -199,3 +199,8 @@ button:hover {
 .avatar:hover {
     transform: scale(1.1);
 }
+.trending-pill:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}

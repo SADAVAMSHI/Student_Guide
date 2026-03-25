@@ -142,3 +142,20 @@ button:hover {
 #result p, #result li { line-height: 1.7; font-size: 1rem; color: #e2e8f0; }
 #result a { color: var(--primary); text-decoration: none; font-weight: bold; }
 #result a:hover { text-decoration: underline; }
+/* --- NEW FEATURES CSS --- */
+.top-nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.login-btn {
+    background: transparent;
+    border: 1px solid var(--secondary);
+    color: var(--secondary);
+    padding: 8px 20px;
+    box-shadow: none;
+}
+

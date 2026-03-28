@@ -249,7 +249,95 @@ button:hover {
 @keyframes pulse { 
     0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--secondary); } 
     50% { opacity: 0.5; text-shadow: none; } 
+}/* --- HAMBURGER & SIDEBAR STYLES --- */
+.hamburger-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: none;
+    padding: 0;
 }
+
+.hamburger-btn:hover {
+    transform: scale(1.1);
+    box-shadow: none;
+    color: var(--secondary);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Hides it off-screen to the right */
+    width: 260px;
+    height: 100vh;
+    background: var(--card);
+    border-left: 2px solid var(--secondary);
+    backdrop-filter: blur(15px);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+}
+
+.sidebar.open {
+    right: 0; /* Slides it in */
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    align-self: flex-end;
+    cursor: pointer;
+    box-shadow: none;
+    padding: 0;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: var(--primary);
+    box-shadow: none;
+    transform: scale(1.1);
+}
+
+.profile-section {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 20px;
+}
+
+#display-username {
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--secondary);
+}
+
+.menu-action-btn {
+    background: rgba(255, 255, 255, 0.05);
+    width: 100%;
+    text-align: left;
+    padding: 12px 20px;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+}
+
+.menu-action-btn:hover {
+    background: rgba(255, 77, 77, 0.2);
+    border-color: #FF4D4D;
+    color: white;
+}
+
+
 
 #result h2, #result h3 { color: var(--secondary); margin-top: 20px; }
 #result p, #result li { line-height: 1.7; font-size: 1rem; color: #e2e8f0; }

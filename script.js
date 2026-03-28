@@ -22,6 +22,7 @@ loginForm.addEventListener('submit', function(event) {
     // Get username to generate a unique avatar
     const username = document.getElementById('username').value;
     avatar.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`;
+    displayUsername.innerText = username; 
     
     // Hide login screen, show app screen
     loginScreen.classList.add('hidden');

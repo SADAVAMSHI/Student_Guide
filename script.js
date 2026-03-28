@@ -7,6 +7,11 @@ const topicInput = document.getElementById('topic');
 const generateBtn = document.getElementById('generate-btn');
 const resultDiv = document.getElementById('result');
 const loader = document.getElementById('loader');
+const menuBtn = document.getElementById('menu-btn');
+const closeBtn = document.getElementById('close-btn');
+const sidebar = document.getElementById('sidebar');
+const logoutBtn = document.getElementById('logout-btn');
+const displayUsername = document.getElementById('display-username');
 
 // --- 1. UI & LOGIN LOGIC ---
 

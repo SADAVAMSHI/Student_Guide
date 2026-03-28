@@ -29,13 +29,23 @@ loginForm.addEventListener('submit', function(event) {
     appScreen.classList.remove('hidden');
 });
 
-// Handle Logout
-avatar.addEventListener('click', function() {
+// --- SIDEBAR MENU LOGIC ---
+menuBtn.addEventListener('click', () => {
+    sidebar.classList.add('open');
+});
+
+closeBtn.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+});
+
+// --- UPDATED LOGOUT LOGIC ---
+logoutBtn.addEventListener('click', function() {
     if(confirm("Are you sure you want to log out?")) {
         // Reset state
         loginForm.reset();
         resultDiv.style.display = 'none';
         topicInput.value = '';
+        sidebar.classList.remove('open'); // Close the menu so it's hidden next time
         
         // Hide app, show login
         appScreen.classList.add('hidden');
